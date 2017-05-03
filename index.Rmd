@@ -1,0 +1,39 @@
+---
+title: "RMarkdown Plotly"
+author: "Alex Cao"
+date: "May 3, 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r data, message=FALSE}
+library(plotly)
+data(LifeCycleSavings)
+```
+
+## Life Cycle Savings Dataset
+
+- Data on the savings ratio 1960-1970 for 50 countries
+- savings ratio = aggregate personal saving divided by disposable income
+- plot of **per-capita disposable income** vs. **savings ratio** with *% population under 15* as the color and *% population over 75* as the marker size
+
+***
+
+```{r}
+p = plot_ly(LifeCycleSavings, x=~dpi, y=~sr, color=~pop15, size=~pop75, type='scatter', mode='markers', width=800, height=550, text = ~paste(rownames(LifeCycleSavings)))
+p
+```
+
+## Summary
+
+- USA has the highest per-capita disposable income (4002) but is in the middle of the pack in terms of savings ratio
+- Japan has the highest savings ratio (21.1) but is in the middle of the pack in terms of per-capita disposable income
+- Zambia saves a lot of money (18.6) and has a lot of income begin with (138)
+- Denmark also saves a lot of money (16.9) of its high dispoable income (2497)
+- Iceland likes to spend most of its income (1900); savings ratio (1.3)
+- Paraguay also spends most of its income but at the other spectrum of income (221); savings ratio (2.0)
+- In general, countries with a lot of young people don't have a lot of disposable income and vice versa (makes sense)
+
